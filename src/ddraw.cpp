@@ -6,8 +6,11 @@
 #pragma comment( lib, "user32" )
 #pragma comment( lib, "gdi32" )
 
+#define CINTERFACE 
 #include <windows.h>
 #include <ddraw.h>
+
+void HookFonts(void);
 
 struct {
 	BITMAPINFOHEADER bmiHeader;
@@ -73,8 +76,8 @@ HRESULT GoFullscreen( void )
 					}
 					ddraw->lpVtbl->Release( ddraw );
 				}
-				FreeLibrary( ddraw_dll );
 			}
+			FreeLibrary( ddraw_dll );
 		}
 	}
 	return DDERR_GENERIC;
@@ -186,6 +189,9 @@ BOOL __stdcall DllEntryPoint( HINSTANCE hDll, DWORD dwReason, LPVOID lpvReserved
 		ButtonWndProc_original = wc.lpfnWndProc;
 		wc.lpfnWndProc = ButtonWndProc;
 		RegisterClass( &wc );
+
+		// Disable AntiAliased Fonts
+		HookFonts();
 	}
 
 	if( dwReason == DLL_PROCESS_DETACH )

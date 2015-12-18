@@ -141,7 +141,6 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="usp10.lib imm32.lib"
 				OutputFile="ddraw.dll"
 				LinkIncremental="1"
 				GenerateManifest="false"
@@ -185,11 +184,15 @@
 	</References>
 	<Files>
 		<File
-			RelativePath=".\ddraw.c"
+			RelativePath=".\ddraw.cpp"
 			>
 		</File>
 		<File
 			RelativePath=".\dpiaware.manifest"
+			>
+		</File>
+		<File
+			RelativePath=".\no_aa.cpp"
 			>
 		</File>
 		<File
